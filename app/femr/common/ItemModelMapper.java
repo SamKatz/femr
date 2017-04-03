@@ -214,15 +214,16 @@ public class ItemModelMapper implements IItemModelMapper {
         if (weeksPregnant != null)
             patientItem.setWeeksPregnant(weeksPregnant);
 
-        if (heightFeet != null)
+        if (heightFeet != null && heightInches != null) {
             patientItem.setHeightFeet(heightFeet);
-        else
-            patientItem.setHeightFeet(0);
-
-        if (heightInches != null)
             patientItem.setHeightInches(heightInches);
-        else
+        }else if(heightFeet != null && heightInches == null) {
+            patientItem.setHeightFeet(heightFeet);
             patientItem.setHeightInches(0);
+        }else if (heightFeet == null && heightInches != null) {
+            patientItem.setHeightFeet(0);
+            patientItem.setHeightInches(heightInches);
+        }
 
         if (weight != null)
             patientItem.setWeight(weight);
